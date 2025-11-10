@@ -130,15 +130,13 @@ if uploaded_file:
 
             c1, c2 = st.columns(2)
 
-            # Create DataFrames with numbering
+            # Create DataFrames (without numbering)
             df_display1 = pd.DataFrame({
-                "Feature No.": list(range(1, 12)),
                 "Feature": first_half,
                 "Value": [df_merged.iloc[0][f] for f in first_half]
             })
 
             df_display2 = pd.DataFrame({
-                "Feature No.": list(range(12, 23)),
                 "Feature": second_half,
                 "Value": [df_merged.iloc[0][f] for f in second_half]
             })
