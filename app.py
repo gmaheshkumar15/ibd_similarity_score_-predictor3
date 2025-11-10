@@ -68,7 +68,7 @@ with col_logo_left:
 
 with col_title:
     st.markdown(
-        "<h1 style='text-align:center; font-size:36px; color:black;'>DMCH-IITD Machine Learning Tool for Estimating the Diet Percentage Similarity with Respect to Diets Consumed by Inflammatory Bowel Disease Patients Prior to Diagnosis</h1>",
+        "<h1 style='text-align:center; font-size:32px; color:black;'>DMCH-IITD Machine Learning Tool for Estimating the Diet Percentage Similarity with Respect to Diets Consumed by Inflammatory Bowel Disease Patients Prior to Diagnosis</h1>",
         unsafe_allow_html=True
     )
 
