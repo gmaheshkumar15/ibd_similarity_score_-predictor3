@@ -95,7 +95,6 @@ st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 # -----------------------------
 # NEW SECTION — Download Excel Template
 # -----------------------------
-st.subheader("📥 Download Excel Template")
 st.markdown("Download the Excel template, fill in your dietary feature values, and upload it below to get predictions.")
 
 try:
@@ -119,7 +118,7 @@ uploaded_file = st.file_uploader("Upload Excel file with 81 features", type=["xl
 if uploaded_file:
     try:
         df_raw = pd.read_excel(uploaded_file, engine="openpyxl")
-        st.subheader("Raw Data")
+        st.subheader("Input Features")
         st.dataframe(df_raw.head())
 
         # Step 1: Merge raw features → 22 merged features
