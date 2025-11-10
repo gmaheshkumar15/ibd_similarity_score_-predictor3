@@ -141,17 +141,19 @@ if uploaded_file:
                 "Value": [df_merged.iloc[0][f] for f in second_half]
             })
 
-            # Add a clean serial number column (1–22)
+           # Add clean numbering (1–22) without pandas index showing
+            df_display1 = df_display1.reset_index(drop=True)
+            df_display2 = df_display2.reset_index(drop=True)
+
             df_display1.insert(0, "No.", range(1, len(df_display1) + 1))
             df_display2.insert(0, "No.", range(len(df_display1) + 1, len(df_display1) + len(df_display2) + 1))
 
-            # Hide default pandas index
+            # Display without index column
             with c1:
                 st.dataframe(df_display1.style.hide(axis="index"), use_container_width=True)
 
             with c2:
                 st.dataframe(df_display2.style.hide(axis="index"), use_container_width=True)
-
 
         # ---------- Right Column ----------
         with col_right:
