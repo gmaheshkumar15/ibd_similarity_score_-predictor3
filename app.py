@@ -144,8 +144,8 @@ if uploaded_file:
             })
 
             # Format Value column to 2 decimals
-            df_display1["Value"] = df_display1["Value"].map("{:.2f}".format)
-            df_display2["Value"] = df_display2["Value"].map("{:.2f}".format)
+            df_display1["Value"] = df_display1["Value"].map("{:.0f}".format)
+            df_display2["Value"] = df_display2["Value"].map("{:.0f}".format)
 
             # Remove any existing index
             df_display1 = df_display1.reset_index(drop=True)
