@@ -4,7 +4,6 @@ import joblib
 from tensorflow.keras.models import load_model
 from merge import merge_features
 from openpyxl import Workbook
-from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.styles import Font, Alignment
 from io import BytesIO
 
@@ -123,7 +122,6 @@ if uploaded_file:
         # Step 4: Layout — Left (features) | Right (predictions)
         col_left, col_right = st.columns([2, 1])
 
-        # ---------- Left Column ----------
         with col_left:
             st.subheader("Merged 22 Features")
 
@@ -164,37 +162,49 @@ if uploaded_file:
             with c2:
                 st.dataframe(styler2, use_container_width=True, hide_index=True)
 
-        # ---------- Right Column ----------
         with col_right:
             st.subheader("Similarity Score")
             st.markdown(f"**Logistic Regression:** {log_prob[0] * 100:.0f}%")
             st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}%")
             st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}%")
 
-            # ---------- Step 5: Formatted Excel Download ----------
+            # ---------- Step 5: Formatted Excel (Vertical Layout) ----------
             output = BytesIO()
             wb = Workbook()
             ws = wb.active
             ws.title = "Prediction Results"
 
-            # Write DataFrame with nice formatting
-            df_export = df_predictions.copy()
-            df_export.reset_index(drop=True, inplace=True)
+            ws.append(["Feature", "Value"])
+            ws["A1"].font = Font(bold=True)
+            ws["B1"].font = Font(bold=True)
+            ws["A1"].alignment = ws["B1"].alignment = Alignment(horizontal="center", vertical="center")
 
-            # Write header
-            for r_idx, row in enumerate(dataframe_to_rows(df_export, index=False, header=True), 1):
-                for c_idx, value in enumerate(row, 1):
-                    cell = ws.cell(row=r_idx, column=c_idx, value=value)
-                    if r_idx == 1:
-                        cell.font = Font(bold=True)
-                        cell.alignment = Alignment(horizontal="center", vertical="center")
-                    else:
-                        cell.alignment = Alignment(horizontal="center", vertical="center")
+            # Add features vertically
+            for f_name in df_merged.columns:
+                ws.append([f_name, df_merged.iloc[0][f_name]])
 
-            # Auto-adjust column widths
-            for column_cells in ws.columns:
-                length = max(len(str(cell.value)) for cell in column_cells)
-                ws.column_dimensions[column_cells[0].column_letter].width = length + 2
+            # Leave a blank row
+            ws.append([])
+
+            # Add model results at the bottom
+            ws.append(["Model", "Similarity (%)"])
+            ws["A{}".format(ws.max_row)].font = Font(bold=True)
+            ws["B{}".format(ws.max_row)].font = Font(bold=True)
+            ws["A{}".format(ws.max_row)].alignment = ws["B{}".format(ws.max_row)].alignment = Alignment(horizontal="center", vertical="center")
+
+            ws.append(["Logistic Regression", round(log_prob[0] * 100, 0)])
+            ws.append(["Support Vector Classifier", round(svc_prob[0] * 100, 0)])
+            ws.append(["Artificial Neural Network", round(ann_prob[0] * 100, 0)])
+
+            # Center align everything
+            for row in ws.iter_rows():
+                for cell in row:
+                    cell.alignment = Alignment(horizontal="center", vertical="center")
+
+            # Auto column width
+            for col in ["A", "B"]:
+                max_len = max(len(str(cell.value)) for cell in ws[col])
+                ws.column_dimensions[col].width = max_len + 2
 
             wb.save(output)
             output.seek(0)
