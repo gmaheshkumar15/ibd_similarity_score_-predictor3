@@ -93,6 +93,25 @@ IBD patients were asked to report their dietary habits prior to diagnosis, and c
 st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 
 # -----------------------------
+# NEW SECTION — Download Excel Template
+# -----------------------------
+st.subheader("📥 Download Excel Template")
+st.markdown("Download the Excel template, fill in your dietary feature values, and upload it below to get predictions.")
+
+try:
+    with open("DMCH-IITD.xlsx", "rb") as f:
+        st.download_button(
+            label="Download Excel Template",
+            data=f,
+            file_name="DMCH-IITD.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+except FileNotFoundError:
+    st.warning("⚠️ Excel template file not found. Please ensure 'DMCH-IITD.xlsx' is in the same folder as app.py")
+
+st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
+
+# -----------------------------
 # File Upload Section
 # -----------------------------
 uploaded_file = st.file_uploader("Upload Excel file with 81 features", type=["xlsx"])
@@ -142,8 +161,8 @@ if uploaded_file:
                 "Value": [df_merged.iloc[0][f] for f in second_half]
             })
 
-            df_display1["Value"] = df_display1["Value"].map("{:.0f}".format)
-            df_display2["Value"] = df_display2["Value"].map("{:.0f}".format)
+            df_display1["Value"] = df_display1["Value"].astype(int)
+            df_display2["Value"] = df_display2["Value"].astype(int)
 
             df_display1 = df_display1.reset_index(drop=True)
             df_display2 = df_display2.reset_index(drop=True)
