@@ -130,37 +130,46 @@ if uploaded_file:
 
             c1, c2 = st.columns(2)
 
-            # Create DataFrames (without numbering)
+            # Create display DataFrames
             df_display1 = pd.DataFrame({
+                "No.": range(1, len(first_half) + 1),
                 "Feature": first_half,
                 "Value": [df_merged.iloc[0][f] for f in first_half]
             })
 
             df_display2 = pd.DataFrame({
+                "No.": range(len(first_half) + 1, len(first_half) + len(second_half) + 1),
                 "Feature": second_half,
                 "Value": [df_merged.iloc[0][f] for f in second_half]
             })
 
-           # Add clean numbering (1–22) without pandas index showing
-            df_display1 = df_display1.reset_index(drop=True)
-            df_display2 = df_display2.reset_index(drop=True)
+            # Format Value column to 2 decimals
+            df_display1["Value"] = df_display1["Value"].map("{:.2f}".format)
+            df_display2["Value"] = df_display2["Value"].map("{:.2f}".format)
 
-            df_display1.insert(0, "No.", range(1, len(df_display1) + 1))
-            df_display2.insert(0, "No.", range(len(df_display1) + 1, len(df_display1) + len(df_display2) + 1))
+            # Apply clean styling (center headers & text, right-align numbers)
+            df_display1_styled = df_display1.style.hide(axis="index").set_table_styles([
+                {"selector": "th", "props": [("font-weight", "bold"), ("text-align", "center")]},
+                {"selector": "td", "props": [("text-align", "center")]}
+            ])
 
-            # Display without index column
+            df_display2_styled = df_display2.style.hide(axis="index").set_table_styles([
+                {"selector": "th", "props": [("font-weight", "bold"), ("text-align", "center")]},
+                {"selector": "td", "props": [("text-align", "center")]}
+            ])
+
+            # Display both tables side by side
             with c1:
-                st.dataframe(df_display1.style.hide(axis="index"), use_container_width=True)
-
+                st.dataframe(df_display1_styled, use_container_width=True)
             with c2:
-                st.dataframe(df_display2.style.hide(axis="index"), use_container_width=True)
+                st.dataframe(df_display2_styled, use_container_width=True)
 
         # ---------- Right Column ----------
         with col_right:
             st.subheader("Similarity Score")
-            st.markdown(f"**Logistic Regression:** {log_prob[0] * 100:.0f}")
-            st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}")
-            st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}")
+            st.markdown(f"**Logistic Regression:** {log_prob[0] * 100:.0f}%")
+            st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}%")
+            st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}%")
 
             # Step 5: Download Results
             output_excel = "prediction_results.xlsx"
