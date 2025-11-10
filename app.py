@@ -2,7 +2,11 @@ import streamlit as st
 import pandas as pd
 import joblib
 from tensorflow.keras.models import load_model
-from merge import merge_features  # your merging logic
+from merge import merge_features
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.styles import Font, Alignment
+from io import BytesIO
 
 # -----------------------------
 # Load models safely
@@ -123,35 +127,29 @@ if uploaded_file:
         with col_left:
             st.subheader("Merged 22 Features")
 
-            # Split into two equal halves
             feature_names = df_merged.columns.tolist()
             first_half = feature_names[:11]
             second_half = feature_names[11:]
 
             c1, c2 = st.columns(2)
 
-            # Create display DataFrames
             df_display1 = pd.DataFrame({
                 "No.": range(1, len(first_half) + 1),
                 "Feature": first_half,
                 "Value": [df_merged.iloc[0][f] for f in first_half]
             })
-
             df_display2 = pd.DataFrame({
                 "No.": range(len(first_half) + 1, len(first_half) + len(second_half) + 1),
                 "Feature": second_half,
                 "Value": [df_merged.iloc[0][f] for f in second_half]
             })
 
-            # Format Value column to 2 decimals
             df_display1["Value"] = df_display1["Value"].map("{:.0f}".format)
             df_display2["Value"] = df_display2["Value"].map("{:.0f}".format)
 
-            # Remove any existing index
             df_display1 = df_display1.reset_index(drop=True)
             df_display2 = df_display2.reset_index(drop=True)
 
-            # Apply styling (center all text, bold headers)
             styler1 = df_display1.style.set_table_styles([
                 {"selector": "th", "props": [("font-weight", "bold"), ("text-align", "center")]},
                 {"selector": "td", "props": [("text-align", "center")]}
@@ -161,7 +159,6 @@ if uploaded_file:
                 {"selector": "td", "props": [("text-align", "center")]}
             ])
 
-            # Display without index
             with c1:
                 st.dataframe(styler1, use_container_width=True, hide_index=True)
             with c2:
@@ -174,17 +171,40 @@ if uploaded_file:
             st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}%")
             st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}%")
 
-            # Step 5: Download Results
-            output_excel = "prediction_results.xlsx"
-            df_predictions.to_excel(output_excel, index=False, engine="openpyxl")
+            # ---------- Step 5: Formatted Excel Download ----------
+            output = BytesIO()
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Prediction Results"
 
-            with open(output_excel, "rb") as f:
-                st.download_button(
-                    label="Download Results as Excel",
-                    data=f,
-                    file_name="prediction_results.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                )
+            # Write DataFrame with nice formatting
+            df_export = df_predictions.copy()
+            df_export.reset_index(drop=True, inplace=True)
+
+            # Write header
+            for r_idx, row in enumerate(dataframe_to_rows(df_export, index=False, header=True), 1):
+                for c_idx, value in enumerate(row, 1):
+                    cell = ws.cell(row=r_idx, column=c_idx, value=value)
+                    if r_idx == 1:
+                        cell.font = Font(bold=True)
+                        cell.alignment = Alignment(horizontal="center", vertical="center")
+                    else:
+                        cell.alignment = Alignment(horizontal="center", vertical="center")
+
+            # Auto-adjust column widths
+            for column_cells in ws.columns:
+                length = max(len(str(cell.value)) for cell in column_cells)
+                ws.column_dimensions[column_cells[0].column_letter].width = length + 2
+
+            wb.save(output)
+            output.seek(0)
+
+            st.download_button(
+                label="Download Results as Excel",
+                data=output,
+                file_name="IBD_Prediction_Results.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
 
     except Exception as e:
         st.error(f"Error processing file: {e}")
