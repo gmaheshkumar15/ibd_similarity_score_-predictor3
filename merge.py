@@ -65,7 +65,7 @@ MERGE_MAP = {
 
     "RED MEAT": ["RED MEAT(MOTTON/PORK/BEEF)"],
 
-    "MILK": ["MILK"],
+    "MILK ": ["MILK"],
 
     "LOW LACTOSE DAIRY": [
         "HOMEMADE CURD",
@@ -73,7 +73,7 @@ MERGE_MAP = {
         "PANEER(COTTAGE CHEESE)"
     ],
 
-    "SWEETENED BEVERAGES": [
+    "SWEETEND BEVERAGES": [
         "CARBONATED DRINKS/SODA",
         "BOTTLED/TETRA-PACK/POWDERED JUICES/FRUITS DRINKS/CONCENTRATES",
         "ENERGY DRINKS",
@@ -98,7 +98,7 @@ MERGE_MAP = {
         "PRE PREPARED READY TO EAT MEALS"
     ],
 
-    "READY TO EAT PACKAGED SNACKS": [
+    "READT TO EAT PACKAGED SNACKS": [
         "SALTY(CHIPS/KURKURE/COOKIES/BISCUITS)",
         "SWEETS(BISCUITS/RUSKS/COOKIES)"
     ],
@@ -153,6 +153,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
