@@ -13,7 +13,7 @@ try:
     ann_model = load_model("ann_final.h5")
     scaler = joblib.load("scaler_final.pkl")
 except Exception as e:
-    st.error(f" Error loading models: {e}")
+    st.error(f"Error loading models: {e}")
 
 # -----------------------------
 # Page config
@@ -26,9 +26,7 @@ st.set_page_config(page_title="IBD Risk Prediction", layout="wide")
 st.markdown("""
     <style>
     .stApp { background-color: #ADD8E6; }
-
     .stSelectbox>div>div>div>select { text-align: center; } 
-    
     .stSelectbox label {
         font-weight: bold !important;
         font-size: 22px !important;
@@ -38,16 +36,13 @@ st.markdown("""
         display: block; 
         margin-bottom: 5px; 
     }
-
     .stSelectbox select {
         border: 2px solid black; 
         border-radius: 5px; 
         padding: 5px 10px; 
     }
-
     .logo-left, .logo-right { width: 120px; display:block; margin:auto; }
     .institute-name { text-align:center; font-weight:bold; font-size:16px; margin-top:5px; }
-    
     .large-score {
         font-size: 70px !important;
         font-weight: bold;
@@ -55,7 +50,6 @@ st.markdown("""
         text-align: center;
         margin-top: 20px;
     }
-
     .intro-paragraph {
         margin-bottom: 0px; 
         padding-bottom: 0px;
@@ -88,19 +82,22 @@ with col_logo_right:
 st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 st.markdown("""
 <p style='text-align:left; font-size:20px; color:black; line-height:1.5;'>
-This tool uses a machine learning model to estimate the similarity of your diet with those consumed by patients prior to an Inflammatory Bowel Disease (IBD) diagnosis. It uses a Logistic Regression model to estimate prediction. The ML model was trained based on data from a dietary survey conducted by DMCH Ludhiana among IBD patients and controls without IBD. IBD patients were asked to report their dietary habits prior to diagnosis, and controls were asked to report current food habits.</p>
+This tool uses a machine learning model to estimate the similarity of your diet with those consumed by patients prior to an Inflammatory Bowel Disease (IBD) diagnosis. 
+It uses a Logistic Regression model to estimate prediction. The ML model was trained based on data from a dietary survey conducted by DMCH Ludhiana among IBD patients and controls without IBD. 
+IBD patients were asked to report their dietary habits prior to diagnosis, and controls were asked to report current food habits.
+</p>
 """, unsafe_allow_html=True)
 st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 
 # -----------------------------
 # File Upload Section
 # -----------------------------
-uploaded_file = st.file_uploader(" Upload Excel file with 81 features", type=["xlsx"])
+uploaded_file = st.file_uploader("Upload Excel file with 81 features", type=["xlsx"])
 
 if uploaded_file:
     try:
-        df_raw = pd.read_excel(uploaded_file)
-        st.subheader(" Raw Data ")
+        df_raw = pd.read_excel(uploaded_file, engine="openpyxl")
+        st.subheader("Raw Data")
         st.dataframe(df_raw.head())
 
         # Step 1: Merge raw features → 22 merged features
@@ -122,47 +119,42 @@ if uploaded_file:
         # Step 4: Layout — Left (features) | Right (predictions)
         col_left, col_right = st.columns([2, 1])
 
-    with col_left:
-        st.subheader(" Merged 22 Features")
+        # ---------- Left Column ----------
+        with col_left:
+            st.subheader("Merged 22 Features")
 
-        # Split into two equal halves
-        feature_names = df_merged.columns.tolist()
-        first_half = feature_names[:11]
-        second_half = feature_names[11:]
+            # Split into two equal halves
+            feature_names = df_merged.columns.tolist()
+            first_half = feature_names[:11]
+            second_half = feature_names[11:]
 
-    # Display features in two columns as tables with proper numbering (1–22)
-        c1, c2 = st.columns(2)
+            c1, c2 = st.columns(2)
 
-    # Create DataFrames with numbering
-        df_display1 = pd.DataFrame({
-            "Feature No.": list(range(1, 12)),
-            "Feature": first_half,
-            "Value": [df_merged.iloc[0][f] for f in first_half]
-        })
+            # Create DataFrames with numbering
+            df_display1 = pd.DataFrame({
+                "Feature No.": list(range(1, 12)),
+                "Feature": first_half,
+                "Value": [df_merged.iloc[0][f] for f in first_half]
+            })
 
-        df_display2 = pd.DataFrame({
-            "Feature No.": list(range(12, 23)),
-            "Feature": second_half,
-            "Value": [df_merged.iloc[0][f] for f in second_half]
-        })
+            df_display2 = pd.DataFrame({
+                "Feature No.": list(range(12, 23)),
+                "Feature": second_half,
+                "Value": [df_merged.iloc[0][f] for f in second_half]
+            })
 
-    with c1:
-        st.table(df_display1)
+            with c1:
+                st.table(df_display1)
 
-    with c2:
-        st.table(df_display2)
+            with c2:
+                st.table(df_display2)
 
-
-
-
-
-        
-
+        # ---------- Right Column ----------
         with col_right:
-            st.subheader(" Similarity Score ")
-            st.markdown(f"**Logistic Regression :** {log_prob[0]*100:.0f} ")
-            st.markdown(f"**Support Vector Classifier:** {svc_prob[0]*100:.0f} ")
-            st.markdown(f"**Artificial Neural Network:** {ann_prob[0]*100:.0f} ")
+            st.subheader("Similarity Score")
+            st.markdown(f"**Logistic Regression:** {log_prob[0] * 100:.0f}")
+            st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}")
+            st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}")
 
             # Step 5: Download Results
             output_excel = "prediction_results.xlsx"
@@ -170,11 +162,11 @@ if uploaded_file:
 
             with open(output_excel, "rb") as f:
                 st.download_button(
-                    label=" Download Results as Excel",
+                    label="Download Results as Excel",
                     data=f,
                     file_name="prediction_results.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 )
 
     except Exception as e:
-        st.error(f" Error processing file: {e}")
+        st.error(f"Error processing file: {e}")
