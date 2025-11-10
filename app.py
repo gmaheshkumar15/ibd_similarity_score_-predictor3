@@ -4,7 +4,7 @@ import joblib
 from tensorflow.keras.models import load_model
 from merge import merge_features
 from openpyxl import Workbook
-from openpyxl.styles import Font, Alignment
+from openpyxl.styles import Font, Alignment, Border, Side
 from io import BytesIO
 
 # -----------------------------
@@ -168,25 +168,33 @@ if uploaded_file:
             st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}%")
             st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}%")
 
-            # ---------- Step 5: Formatted Excel (Vertical Layout) ----------
+            # ---------- Step 5: Formatted Excel (Vertical Layout with Title & Borders) ----------
             output = BytesIO()
             wb = Workbook()
             ws = wb.active
             ws.title = "Prediction Results"
 
-            ws.append(["Feature", "Value"])
-            ws["A1"].font = Font(bold=True)
-            ws["B1"].font = Font(bold=True)
-            ws["A1"].alignment = ws["B1"].alignment = Alignment(horizontal="center", vertical="center")
+            # ---- Title Row ----
+            ws.merge_cells("A1:B1")
+            title_cell = ws["A1"]
+            title_cell.value = "IBD Prediction Results"
+            title_cell.font = Font(bold=True, size=14)
+            title_cell.alignment = Alignment(horizontal="center", vertical="center")
 
-            # Add features vertically
+            # ---- Header Row ----
+            ws.append(["Feature", "Value"])
+            ws["A2"].font = Font(bold=True)
+            ws["B2"].font = Font(bold=True)
+            ws["A2"].alignment = ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
+
+            # ---- Add Feature Rows ----
             for f_name in df_merged.columns:
                 ws.append([f_name, df_merged.iloc[0][f_name]])
 
-            # Leave a blank row
+            # ---- Blank Row ----
             ws.append([])
 
-            # Add model results at the bottom
+            # ---- Add Model Results ----
             ws.append(["Model", "Similarity (%)"])
             ws["A{}".format(ws.max_row)].font = Font(bold=True)
             ws["B{}".format(ws.max_row)].font = Font(bold=True)
@@ -196,15 +204,23 @@ if uploaded_file:
             ws.append(["Support Vector Classifier", round(svc_prob[0] * 100, 0)])
             ws.append(["Artificial Neural Network", round(ann_prob[0] * 100, 0)])
 
-            # Center align everything
-            for row in ws.iter_rows():
+            # ---- Borders (inside + outside) ----
+            thin_border = Border(
+                left=Side(style="thin"),
+                right=Side(style="thin"),
+                top=Side(style="thin"),
+                bottom=Side(style="thin")
+            )
+
+            for row in ws.iter_rows(min_row=2, max_row=ws.max_row, min_col=1, max_col=2):
                 for cell in row:
+                    cell.border = thin_border
                     cell.alignment = Alignment(horizontal="center", vertical="center")
 
-            # Auto column width
+            # ---- Auto Column Width ----
             for col in ["A", "B"]:
-                max_len = max(len(str(cell.value)) for cell in ws[col])
-                ws.column_dimensions[col].width = max_len + 2
+                max_len = max(len(str(cell.value)) if cell.value else 0 for cell in ws[col])
+                ws.column_dimensions[col].width = max_len + 4
 
             wb.save(output)
             output.seek(0)
