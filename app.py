@@ -122,29 +122,29 @@ if uploaded_file:
         # Step 4: Layout — Left (features) | Right (predictions)
         col_left, col_right = st.columns([2, 1])
 
-        with col_left:
-    st.subheader(" Merged 22 Features")
+    with col_left:
+        st.subheader(" Merged 22 Features")
 
-    # Split into two equal halves
-    feature_names = df_merged.columns.tolist()
-    first_half = feature_names[:11]
-    second_half = feature_names[11:]
+        # Split into two equal halves
+        feature_names = df_merged.columns.tolist()
+        first_half = feature_names[:11]
+        second_half = feature_names[11:]
 
     # Display features in two columns as tables with proper numbering (1–22)
-    c1, c2 = st.columns(2)
+        c1, c2 = st.columns(2)
 
     # Create DataFrames with numbering
-    df_display1 = pd.DataFrame({
-        "Feature No.": list(range(1, 12)),
-        "Feature": first_half,
-        "Value": [df_merged.iloc[0][f] for f in first_half]
-    })
+        df_display1 = pd.DataFrame({
+            "Feature No.": list(range(1, 12)),
+            "Feature": first_half,
+            "Value": [df_merged.iloc[0][f] for f in first_half]
+        })
 
-    df_display2 = pd.DataFrame({
-        "Feature No.": list(range(12, 23)),
-        "Feature": second_half,
-        "Value": [df_merged.iloc[0][f] for f in second_half]
-    })
+        df_display2 = pd.DataFrame({
+            "Feature No.": list(range(12, 23)),
+            "Feature": second_half,
+            "Value": [df_merged.iloc[0][f] for f in second_half]
+        })
 
     with c1:
         st.table(df_display1)
