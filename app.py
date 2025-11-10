@@ -147,22 +147,25 @@ if uploaded_file:
             df_display1["Value"] = df_display1["Value"].map("{:.2f}".format)
             df_display2["Value"] = df_display2["Value"].map("{:.2f}".format)
 
-            # Apply clean styling (center headers & text, right-align numbers)
-            df_display1_styled = df_display1.style.hide(axis="index").set_table_styles([
+            # Remove any existing index
+            df_display1 = df_display1.reset_index(drop=True)
+            df_display2 = df_display2.reset_index(drop=True)
+
+            # Apply styling (center all text, bold headers)
+            styler1 = df_display1.style.set_table_styles([
+                {"selector": "th", "props": [("font-weight", "bold"), ("text-align", "center")]},
+                {"selector": "td", "props": [("text-align", "center")]}
+            ])
+            styler2 = df_display2.style.set_table_styles([
                 {"selector": "th", "props": [("font-weight", "bold"), ("text-align", "center")]},
                 {"selector": "td", "props": [("text-align", "center")]}
             ])
 
-            df_display2_styled = df_display2.style.hide(axis="index").set_table_styles([
-                {"selector": "th", "props": [("font-weight", "bold"), ("text-align", "center")]},
-                {"selector": "td", "props": [("text-align", "center")]}
-            ])
-
-            # Display both tables side by side
+            # Display without index
             with c1:
-                st.dataframe(df_display1_styled, use_container_width=True)
+                st.dataframe(styler1, use_container_width=True, hide_index=True)
             with c2:
-                st.dataframe(df_display2_styled, use_container_width=True)
+                st.dataframe(styler2, use_container_width=True, hide_index=True)
 
         # ---------- Right Column ----------
         with col_right:
