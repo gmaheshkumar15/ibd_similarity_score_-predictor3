@@ -86,7 +86,7 @@ st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 st.markdown("""
 <p style='text-align:left; font-size:20px; color:black; line-height:1.5;'>
 This tool uses a machine learning model to estimate the similarity of your diet with those consumed by patients prior to an Inflammatory Bowel Disease (IBD) diagnosis. 
-It uses a Logistic Regression , Support Vector Classifier and Artificial Neural Network to estimate prediction. The ML models were trained based on data from a dietary survey conducted by DMCH Ludhiana among IBD patients and controls without IBD. 
+It uses a Logistic Regression, Support Vector Classifier and Artificial Neural Network to estimate prediction. The ML models were trained based on data from a dietary survey conducted by DMCH Ludhiana among IBD patients and Controls without IBD. 
 IBD patients were asked to report their dietary habits prior to diagnosis, and controls were asked to report current food habits.
 </p>
 """, unsafe_allow_html=True)
@@ -95,8 +95,7 @@ st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 # -----------------------------
 # NEW SECTION — Download Excel Template
 # -----------------------------
-st.markdown("Download the Excel template, fill in your dietary feature values, and upload it below to get predictions.")
-
+st.markdown(Download the Excel template, select the consumption level for each food item (higher values indicate higher consumption), and upload the file below to get predictions.
 try:
     with open("DMCH-IITD.xlsx", "rb") as f:
         st.download_button(
