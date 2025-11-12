@@ -95,7 +95,7 @@ st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 # -----------------------------
 # NEW SECTION — Download Excel Template
 # -----------------------------
-st.markdown(Download the Excel template, select the consumption level for each food item (higher values indicate higher consumption), and upload the file below to get predictions.
+st.markdown("Download the Excel template, select the consumption level for each food item (higher values indicate higher consumption), and upload the file below to get predictions.")
 try:
     with open("DMCH-IITD.xlsx", "rb") as f:
         st.download_button(
