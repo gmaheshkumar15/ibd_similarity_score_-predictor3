@@ -175,8 +175,8 @@ if uploaded_file:
                 st.dataframe(styler2, use_container_width=True, hide_index=True)
 
         with col_right:
-            st.markdown("<h3 style='text-align:right;'>Similarity Score</h3>", unsafe_allow_html=True)
-            st.markdown(f"<p style='font-size:70px; font-weight:bold; color:#8B0000; text-align:center;'>{log_prob[0] * 100:.0f}%</p>",unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align:center;'>Similarity Score</h3>", unsafe_allow_html=True)
+            st.markdown(f"<p style='font-size:60px; font-weight:bold; color:#8B0000; text-align:center;'>{log_prob[0] * 100:.0f}%</p>",unsafe_allow_html=True)
 
             
             # ---------- Step 5: Formatted Excel (Vertical Layout with Title & Borders) ----------
