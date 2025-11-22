@@ -176,7 +176,7 @@ if uploaded_file:
 
         with col_right:
             st.subheader("Similarity Score")
-            st.markdown(f"**:** {log_prob[0] * 100:.0f}%")
+            st.markdown(f"<p style='font-size:80px; font-weight:bold; color:#8B0000; text-align:center;'>{log_prob[0] * 100:.0f}%</p>",unsafe_allow_html=True)
 
             
             # ---------- Step 5: Formatted Excel (Vertical Layout with Title & Borders) ----------
