@@ -12,8 +12,6 @@ from io import BytesIO
 # -----------------------------
 try:
     log_model = joblib.load("logistic_final.pkl")
-    svc_model = joblib.load("svc_final.pkl")
-    ann_model = load_model("ann_final.h5")
     scaler = joblib.load("scaler_final.pkl")
 except Exception as e:
     st.error(f"Error loading models: {e}")
@@ -86,9 +84,9 @@ with col_logo_right:
 st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 st.markdown("""
 <p style='text-align:left; font-size:20px; color:black; line-height:1.5;'>
-This tool uses a machine learning model to estimate the similarity of your diet with those consumed by patients prior to an Inflammatory Bowel Disease (IBD) diagnosis. 
-It uses a Logistic Regression, Support Vector Classifier and Artificial Neural Network to estimate prediction. The ML models were trained based on data from a dietary survey conducted by DMCH Ludhiana among IBD patients and Controls without IBD. 
-IBD patients were asked to report their dietary habits prior to diagnosis, and controls were asked to report current food habits.
+This tool is developed by DMCH Ludhiana and IIT Delhi. It uses machine learning (ML) models to estimate the similarity of a diet with those consumed by patients prior to an Inflammatory Bowel Disease (IBD) diagnosis. 
+The ML model was trained based on data from a dietary survey conducted by DMCH Ludhiana among IBD patients and Controls without IBD. 
+IBD patients were asked to report their dietary habits prior to diagnosis, and Controls were asked to report current food habits.
 </p>
 """, unsafe_allow_html=True)
 st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
