@@ -20,7 +20,7 @@ MERGE_MAP = {
         "RED, DEEP ORANGES, YELLOW FRUITS(MANGO, PAPAYA, PEACH ETC)",
         "CITRUS FRUITS(LEMON, ORANGE, GRAPEFRUITS ETC)",
         "BERRIES AND GRAPES(RASBERRY, CHERRY, STRAWBERRY, AMLA, GRAPES)",
-        "OTHERS( APPLE, BANANA, CHEEKU, KIWI, ETC)"
+        "OTHERS(APPLE, BANANA, CHEEKU, KIWI, ETC)"
     ],
 
     "OTHER VEGETABLES": [
@@ -153,6 +153,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
