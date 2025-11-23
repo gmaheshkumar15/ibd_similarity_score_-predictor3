@@ -119,12 +119,12 @@ if uploaded_file:
         df_temp = pd.read_excel(uploaded_file, engine="openpyxl", header=None)
 
 # Find the row that contains the first feature name
-       for i in range(len(df_temp)):
-           if str(df_temp.iloc[i,0]).strip().upper() in feature_names[0].upper():
-               header_row = i
-               break
+        for i in range(len(df_temp)):
+            if str(df_temp.iloc[i,0]).strip().upper() in feature_names[0].upper():
+                header_row = i
+                break
 
-       df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=header_row)
+        df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=header_row)
 
 
 
