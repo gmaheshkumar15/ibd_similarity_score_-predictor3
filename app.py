@@ -128,13 +128,9 @@ if uploaded_file:
 
         # Step 3: Predictions
         log_prob = log_model.predict_proba(df_scaled)[:, 1]
-        svc_prob = svc_model.predict_proba(df_scaled)[:, 1]
-        ann_prob = ann_model.predict(df_scaled).flatten()
 
         df_predictions = df_merged.copy()
         df_predictions["Logistic_Prob"] = log_prob
-        df_predictions["SVC_Prob"] = svc_prob
-        df_predictions["ANN_Prob"] = ann_prob
 
         # Step 4: Layout — Left (features) | Right (predictions)
         col_left, col_right = st.columns([2, 1])
@@ -181,9 +177,7 @@ if uploaded_file:
 
         with col_right:
             st.subheader("Similarity Score")
-            st.markdown(f"**Logistic Regression:** {log_prob[0] * 100:.0f}%")
-            st.markdown(f"**Support Vector Classifier:** {svc_prob[0] * 100:.0f}%")
-            st.markdown(f"**Artificial Neural Network:** {ann_prob[0] * 100:.0f}%")
+            st.markdown(f" {log_prob[0] * 100:.0f}")
 
             # ---------- Step 5: Formatted Excel (Vertical Layout with Title & Borders) ----------
             output = BytesIO()
