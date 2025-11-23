@@ -37,12 +37,12 @@ MERGE_MAP = {
                                    "COCONUT OIL, PALM OIL"],
 
     "PREDOMINANT UNSATURATED FATS": [
-        "RICE_BRAN_OIL","SUNFLOWER_OIL","SAFFLOWER_OIL","LINSEED_OIL",
-        "CANOLA_OIL","MUSTARD_OIL","OLIVE_OIL"],
+        "RICE BRAN OIL, SUNFLOWER OIL, SAFFLOWER ETC",
+        "LINSEED OIL(ALSI), CANOLA OIL, MUSTARD OIL, OLIVE OIL"],
 
 
     
-    "TRANS FATS": ["DALDA","VANASPATI"],
+    "TRANS FATS": ["DALDA","VANASPATI","ETC"],
     
     
     
@@ -69,20 +69,22 @@ MERGE_MAP = {
         "PACKED BREADS/BUNS/KULCHA/PAV",
         "CAKES/MUFFIN/PASTRY/CAKE MIX",
         "BREAKFAST CEREAL/BREAKFAST BARS",
-        "ICE CREAM","PUDDINGS AND PIES",
+        "ICE CREAM",
+        "PUDDINGS AND PIES",
         "JELLIES N JAM",
         "CHOCOLATES",
-        "CANDIES/GUMMIES",
         "DRESSINGS,MAYONNAISE,SPREADS AND MARGARINES",
+        "CANDIES/GUMMIES",
         "PACKED SOUPS",
         "INSTANT NOODLES",
         "PACKED MEAT/FISH/VEGETABLES",
-        "PROCESSED CHEESE"
-        "PRE PREPARED READY TO EAT MEALS",
-        "CONDENSED MILK/MILKMAID"
+        "PROCESSED CHEESE",
+        "CONDENSED MILK/MILKMAID
+        "PRE PREPARED READY TO EAT MEALS"
+        "
     ],
     "READT TO EAT PACKAGED SNACKS": ["SALTY(CHIPS/ KURKURE/COOKIES/BISCUITS)",
-                                     "SWEETS(BISCUITS/RUSKS/COOKIES"],
+                                     "SWEETS(BISCUITS/RUSKS/COOKIES)"],
     
     "SAVORY SNACKS": ["SAMOSA/KACHORI,PAKORA,MATHRI,ETC",
                       "MANCHURIAN/URGER/HOT DOGS ETC",
@@ -90,13 +92,13 @@ MERGE_MAP = {
                       "PIZZA/PASTA/NOODLES/PATTY/MOMOS ETC"],
 
     "PROCESSED FOODS": ["FROZEN FOOD(NOVA CLASS- 1)",
-                        "KETCHUP/PUREE(CLASS-III)_",
+                        "KETCHUP/PUREE(CLASS-III)",
                         "PICKLES(NOVA-III)",
-                        "CHUTNEY(NOVA -III",
-                        "CANNED VEGITABLES PRESEVERED IN SALTY SOLUTIONS/VINEGER(NOVA CLASS- III",
-                        "CANNED FRUITS IN SUGAR SYRUP(NOVA CLASS III",
-                        "CANNED FISH(NOVA-III",
-                        "SALTED DRIED SMOKE MEAT/FISH/SAUSAGES(NOVA CLASS-III",
+                        "CHUTNEY(NOVA -III)",
+                        "CANNED VEGITABLES PRESEVERED IN SALTY SOLUTIONS/VINEGER(NOVA CLASS- III)",
+                        "CANNED FRUITS IN SUGAR SYRUP(NOVA CLASS III)",
+                        "CANNED FISH(NOVA-III)",
+                        "SALTED DRIED SMOKE MEAT/FISH/SAUSAGES(NOVA CLASS-III)",
                         "ALMOND MILK,SOY MILK,COCONUT MILK OAT MILK,TOFU"],
     
     "INDIAN SWEET MEATS": ["KHOYA BURFI,RUBRI,LADOO,KALAKAND,GULAB JAMUN,SUNDESH,KHEER,HALWA,IMRTI, ETC",
@@ -118,6 +120,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
