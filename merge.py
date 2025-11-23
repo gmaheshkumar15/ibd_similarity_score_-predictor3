@@ -2,7 +2,7 @@
 import pandas as pd
 MERGE_MAP = {
     "WHEAT(CHAPATI,ROTI,NAAN,DALIA,RAWA/SOOJI,SEVIYAAN": [
-            'WHEAT(CHAPATI,ROTI,NAAN,DALIA,RAWA/SOOJI,SEVIYAAN'],
+            "WHEAT(CHAPATI,ROTI,NAAN,DALIA,RAWA/SOOJI,SEVIYAAN"],
     
     "WHEAT FREE CEREALS": [
         "RICE(RICE,RICE FLOOR, DOSA,POHA,IDLLI,MURMURA)",
@@ -21,7 +21,7 @@ MERGE_MAP = {
     
     "OTHER VEGETABLES": [
         "GREEN LEAFY",
-        "GREEN(TINDA.TORI,KADU ETC"
+        "GREEN(TINDA.TORI,KADU ETC",
         "CRUCIFEROUS",
         "BULBS(GARLIC,OINION)",
         "OTHERS(BRINJAL,CARROT,RADISH,CUCUMBER, TERNIP,GINGER ETC)"],
@@ -42,11 +42,11 @@ MERGE_MAP = {
 
 
     
-    "TRANS FATS": ["DALDA","VANASPATI","ETC"],
+    "TRANS FATS": ["DALDA,VANASPATI,ETC"],
     
     
     
-    "NUTS AND OILSEEDS": ["ALMONDS","WALNUTS","GROUNDNUTS","CASHEWNUTS","FLAX_SEEDS","SUNFLOWER_SEEDS"],
+    "NUTS AND OILSEEDS": ["ALMONDS,WALNUTS,GROUNDNUTS,CASHEWNUTS,FLAX_SEEDS,SUNFLOWER_SEEDS"],
     
     "EGGS,FISH AND POULTRY": ["EGGS",
                               "CHICKEN/TURKEY",
@@ -79,9 +79,9 @@ MERGE_MAP = {
         "INSTANT NOODLES",
         "PACKED MEAT/FISH/VEGETABLES",
         "PROCESSED CHEESE",
-        "CONDENSED MILK/MILKMAID
+        "CONDENSED MILK/MILKMAID",
         "PRE PREPARED READY TO EAT MEALS"
-        "
+
     ],
     "READT TO EAT PACKAGED SNACKS": ["SALTY(CHIPS/ KURKURE/COOKIES/BISCUITS)",
                                      "SWEETS(BISCUITS/RUSKS/COOKIES)"],
@@ -120,6 +120,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
