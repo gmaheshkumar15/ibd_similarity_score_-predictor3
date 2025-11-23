@@ -115,33 +115,12 @@ uploaded_file = st.file_uploader("Upload Excel file with 81 features", type=["xl
 
 if uploaded_file:
     try:
-        df_temp = pd.read_excel(uploaded_file, engine="openpyxl", header=None)
+        # DIRECTLY READ THE CORRECT HEADER ROW (ROW 2 → index 2)
+        df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=2)
 
-# Find first row where at least 5 cells are non-empty text → header row
-        header_row = None
-        for i in range(len(df_temp)):
-            row = df_temp.iloc[i]
-            text_count = sum([isinstance(x, str) for x in row])
-            if text_count >= 5:
-                header_row = i
-                break
+        # Convert values to numeric
+        df_raw = df_raw.apply(pd.to_numeric, errors='coerce').fillna(0)
 
-        df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=header_row)
-        # Remove description/instruction rows (non-numeric)
-        # Convert only numeric rows, keep headers untouched
-        df_raw = df_raw.copy()
-
-# Keep header row intact
-        headers = df_raw.columns
-
-# Convert all values except header row
-        df_raw = df_raw.apply(pd.to_numeric, errors='coerce')
-
-# Replace NaN with 0 (instead of dropping rows)
-        df_raw = df_raw.fillna(0)
-
-# Restore correct column names
-        df_raw.columns = headers
 
 
 
