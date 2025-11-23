@@ -111,7 +111,7 @@ st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
 # -----------------------------
 # File Upload Section
 # -----------------------------
-uploaded_file = st.file_uploader("Upload Excel file with 81 features", type=["xlsx"])
+uploaded_file = st.file_uploader("Upload Excel file with 77 features", type=["xlsx"])
 
 if uploaded_file:
     try:
