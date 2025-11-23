@@ -27,8 +27,8 @@ MERGE_MAP = {
         "GREEN LEAFY",
         "GREEN(TINDA.TORI, KADU ETC)",
         "CRUCIFEROUS",
-        "BULBS(GARLIC, ONION)",
-        "OTHERS(BRINJAL, CARROT, RADISH, CUCUMBER, TERNIP, GINGER ETC)"
+        "BULBS(GARLIC,ONION)",
+        "OTHERS(BRINJAL,CARROT,RADISH,CUCUMBER,TURNIP,GINGER ETC)"
     ],
 
     "STARCHY(POTATO,SWEET PATATO,ARBI ETC)": [
@@ -153,6 +153,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
