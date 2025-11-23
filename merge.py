@@ -6,7 +6,7 @@ MERGE_MAP = {
     
     "WHEAT FREE CEREALS": [
         "RICE(RICE, RICE FLOOR, DOSA, POHA, IDLI, MURMURA)",
-        "MAIZE(CHAPATI, CHHALI, BHUTTA, CORN COB",
+        "MAIZE(CHAPATI, CHHALI, BHUTTA, CORN COB)",
         "OATS(OATS MEAL, ROLLED OATS)",
         "BARLEY",
         "RAGI, BAJRA, JOWAR",
@@ -17,7 +17,7 @@ MERGE_MAP = {
         "RED, DEEP ORANGES, YELLOW FRUITS(MANGO, PAPAYA, PEACH ETC)",
         "CITRUS FRUITS(LEMON, ORANGE, GRAPEFRUITS ETC)",
         "BERRIES AND GRAPES(RASBERRY, CHERRY, STRAWBERRY, AMLA, GRAPES)",
-        "OTHERS( APPLE, BANANA, CHEEKU, KIWI, ETC)"],
+        "OTHERS(APPLE, BANANA, CHEEKU, KIWI, ETC)"],
     
     "OTHER VEGETABLES": [
         "GREEN LEAFY",
@@ -99,7 +99,7 @@ MERGE_MAP = {
                         "CANNED FRUITS IN SUGAR SYRUP(NOVA CLASS III)",
                         "CANNED FISH(NOVA-III)",
                         "SALTED DRIED SMOKE MEAT/FISH/SAUSAGES(NOVA CLASS-III)",
-                        "ALMOND MILK, SOY MILK, COCONUT MILK, OAT MILK,TOFU"],
+                        "ALMOND MILK, SOY MILK, COCONUT MILK, OAT MILK, TOFU"],
     
     "INDIAN SWEET MEATS": ["KHOYA BURFI, RUBRI, LADOO, KALAKAND, GULAB JAMUN, SUNDESH, KHEER, HALWA, IMRTI, ETC",
                            "KHOYA"],
@@ -120,6 +120,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
