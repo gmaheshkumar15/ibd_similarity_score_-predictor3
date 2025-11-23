@@ -116,7 +116,7 @@ uploaded_file = st.file_uploader("Upload Excel file with 81 features", type=["xl
 if uploaded_file:
     try:
         # DIRECTLY READ THE CORRECT HEADER ROW (ROW 2 → index 2)
-        df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=1)
+        df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=0)
 
 
 
