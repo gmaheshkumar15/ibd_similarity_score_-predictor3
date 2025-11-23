@@ -154,8 +154,9 @@ if uploaded_file:
                 "Value": [df_merged.iloc[0][f] for f in second_half]
             })
 
-            df_display1["Value"] = df_display1["Value"].astype(int)
-            df_display2["Value"] = df_display2["Value"].astype(int)
+            df_display1["Value"] = df_display1["Value"].round(0).astype(int)
+            df_display2["Value"] = df_display2["Value"].round(0).astype(int)
+
 
             df_display1 = df_display1.reset_index(drop=True)
             df_display2 = df_display2.reset_index(drop=True)
