@@ -212,8 +212,6 @@ if uploaded_file:
             ws["A{}".format(ws.max_row)].alignment = ws["B{}".format(ws.max_row)].alignment = Alignment(horizontal="center", vertical="center")
 
             ws.append(["Logistic Regression", round(log_prob[0] * 100, 0)])
-            ws.append(["Support Vector Classifier", round(svc_prob[0] * 100, 0)])
-            ws.append(["Artificial Neural Network", round(ann_prob[0] * 100, 0)])
 
             # ---- Borders (inside + outside) ----
             thin_border = Border(
