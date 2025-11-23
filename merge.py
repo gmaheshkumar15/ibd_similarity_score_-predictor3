@@ -4,7 +4,7 @@ MERGE_MAP = {
     "Wheat(Chapati,Roti,Naan,Dalia,Rawa/Sooji,Seviyaan": [
             'Wheat(Chapati,Roti,Naan,Dalia,Rawa/Sooji,Seviyaan'],
     
-    "Wheat Free Cereals": [
+    "WHEAT FREE CEREALS": [
         "RICE(RICE,RICE FLOOR, DOSA,POHA,IDLLI,MURMURA)",
         "MAIZE(CHAPATI,CHHALI,BHUTTA,CORN COB",
         "OATS(OATS MEAL,ROLLED",
@@ -13,55 +13,59 @@ MERGE_MAP = {
         "AMARANTH(CHULAI,RAJGIRA,SEEL",
         "OTHERS(EX. BESAN ROTI,ETC" ],
     
-    "Fruits": [
+    "FRUITS": [
         "RED,DEEP ORANGES,YELLOW FRUITS(MANGO,PAPAYA,PEACH ETC",
         "CITRUS FRUITS(LEMON,ORANGE,GRAPEFRUITS ETC",
         "BERRIES AND GRAPES(RASBERRY, CHERRY,STRAWBERRY,AMLA,GRAPES",
         "OTHERS( APPLE,BANANA,CHEEKU,KIWI,ETC"],
     
-    "Other Vegetables": [
+    "OTHER VEGETABLES": [
         "GREEN LEAFY",
         "GREEN(TINDA.TORI,KADU ETC"
         "CRUCIFEROUS",
         "BULBS(GARLIC,OINION)",
         "OTHERS(BRINJAL,CARROT,RADISH,CUCUMBER, TERNIP,GINGER ETC)"],
     
-    "Starchy(Potato,Sweet Patato,Arbi Etc)": ["Starchy(Potato,Sweet Patato,Arbi Etc)"],
+    "STARCHY(POTATO,SWEET PATATO,ARBI ETC)": ["Starchy(Potato,Sweet Patato,Arbi Etc)"],
     
-    "Pulses And Legumes": [
+    "PULSES AND LEGUMES": [
         "PULSES(LENTILS,ARHAR,TUR,GREEN GRAMS,BLACK GRAMS ETC)",
         "LEGUMES( GREEN PEAS,CHICKPEA,RAJMAH,RONGI ETC)",
         "SOYBEANS"],
     
-    " Predominant Saturated Fats": ["DESI GHEE,BUTER,MALAI",
+    "PREDOMINANT SATURATED FATS": ["DESI GHEE,BUTER,MALAI",
                                    "COCONUT OIL, PALM OIL"],
-    
-    "Trans Fats": ["DALDA","VANASPATI"],
-    
-    "Predominant Unsaturated Fats": [
+
+    "PREDOMINANT UNSATURATED FATS": [
         "RICE_BRAN_OIL","SUNFLOWER_OIL","SAFFLOWER_OIL","LINSEED_OIL",
         "CANOLA_OIL","MUSTARD_OIL","OLIVE_OIL"],
+
+
     
-    "Nuts And Oilseeds": ["ALMONDS","WALNUTS","GROUNDNUTS","CASHEWNUTS","FLAX_SEEDS","SUNFLOWER_SEEDS"],
+    "TRANS FATS": ["DALDA","VANASPATI"],
     
-    "Eggs,Fish And Poultry": ["EGGS",
+    
+    
+    "NUTS AND OILSEEDS": ["ALMONDS","WALNUTS","GROUNDNUTS","CASHEWNUTS","FLAX_SEEDS","SUNFLOWER_SEEDS"],
+    
+    "EGGS,FISH AND POULTRY": ["EGGS",
                               "CHICKEN/TURKEY",
                               "FISH AND SEAFOOD"],
     
-    "Red Meat": ["RED MEAT(MOTTON/PORK/BEEF)"],
+    "RED MEAT": ["RED MEAT(MOTTON/PORK/BEEF)"],
     
-    "Milk": ["MILK"],
+    "MILK": ["MILK "],
     
-    "Low Lactose_Dairy": ["HOME MADE CURD",
+    "LOW LACTOSE DAIRY": ["HOME MADE CURD",
                           "HOMEMADE BUTTERMILK/LASSI/CHAACH",
                          "COTTAGE CHEESE(PANIR)"],
     
-    "Sweetend Beverages": ["CARBONATED DRINKS/SODA",
+    "SWEETEND BEVERAGES": ["CARBONATED DRINKS/SODA",
                            "BOTTLED/TETRA-PACK/POWDERED JUICES/FRUITS DRINKS/CONCENTRATES",
                            "ENERGY DRINKS",
                            "BOTTLED/PACKED DAIRY DRINKS"],
     
-    "Ultra Processed Foods": [
+    "ULTRA PROCESSED FOODS": [
         "PACKED BREADS/BUNS/KULCHA/PAV",
         "CAKES/MUFFIN/PASTRY/CAKE MIX",
         "BREAKFAST CEREAL/BREAKFAST BARS",
@@ -77,15 +81,15 @@ MERGE_MAP = {
         "PRE PREPARED READY TO EAT MEALS",
         "CONDENSED MILK/MILKMAID"
     ],
-    "Readt To Eat Packaged Snacks": ["SALTY(CHIPS/ KURKURE/COOKIES/BISCUITS)",
+    "READT TO EAT PACKAGED SNACKS": ["SALTY(CHIPS/ KURKURE/COOKIES/BISCUITS)",
                                      "SWEETS(BISCUITS/RUSKS/COOKIES"],
     
-    "Savory Snacks": ["SAMOSA/KACHORI,PAKORA,MATHRI,ETC",
+    "SAVORY SNACKS": ["SAMOSA/KACHORI,PAKORA,MATHRI,ETC",
                       "MANCHURIAN/URGER/HOT DOGS ETC",
                       "BHEL PURI/MURI/PANI PURI/PUCHKA/BHALLA/DHOKLA",
                       "PIZZA/PASTA/NOODLES/PATTY/MOMOS ETC"],
 
-    "Processed Foods": ["FROZEN FOOD(NOVA CLASS- 1)",
+    "PROCESSED FOODS": ["FROZEN FOOD(NOVA CLASS- 1)",
                         "KETCHUP/PUREE(CLASS-III)_",
                         "PICKLES(NOVA-III)",
                         "CHUTNEY(NOVA -III",
@@ -95,16 +99,16 @@ MERGE_MAP = {
                         "SALTED DRIED SMOKE MEAT/FISH/SAUSAGES(NOVA CLASS-III",
                         "ALMOND MILK,SOY MILK,COCONUT MILK OAT MILK,TOFU"],
     
-    "Indian Sweet Meats": ["KHOYA BURFI,RUBRI,LADOO,KALAKAND,GULAB JAMUN,SUNDESH,KHEER,HALWA,IMRTI, ETC",
+    "INDIAN SWEET MEATS": ["KHOYA BURFI,RUBRI,LADOO,KALAKAND,GULAB JAMUN,SUNDESH,KHEER,HALWA,IMRTI, ETC",
                            "KHOYA"],
     
-    "Food Supplements": ["CALCIUM SUPPLEMENTS",	
+    "FOOD SUPPLEMENTS": ["CALCIUM SUPPLEMENTS",	
                          "VIT -D SUPPLEMENTS",
                          "ZINC SUPPLEMENTS",
                          "IRON SUPPLEMENTS",
                          "PROTEIN SUPPLEMENTS"],
     
-    "Ergogenic Supplements": ["FAT BURNERS/BODY BUILDING GYM SUPPLEMENTS"],
+    "ERGOGENIC SUPPLEMENTS": ["FAT BURNERS/BODY BUILDING GYM SUPPLEMENTS"],
     
 }
 
@@ -114,4 +118,5 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
