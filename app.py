@@ -128,9 +128,20 @@ if uploaded_file:
 
         df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=header_row)
         # Remove description/instruction rows (non-numeric)
+        # Convert only numeric rows, keep headers untouched
+        df_raw = df_raw.copy()
+
+# Keep header row intact
+        headers = df_raw.columns
+
+# Convert all values except header row
         df_raw = df_raw.apply(pd.to_numeric, errors='coerce')
-        df_raw = df_raw.dropna(how='all')
-        df_raw = df_raw.reset_index(drop=True)
+
+# Replace NaN with 0 (instead of dropping rows)
+        df_raw = df_raw.fillna(0)
+
+# Restore correct column names
+        df_raw.columns = headers
 
 
 
