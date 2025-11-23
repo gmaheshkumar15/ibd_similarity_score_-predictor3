@@ -128,10 +128,7 @@ if uploaded_file:
         
         st.subheader("Input Features")
         st.dataframe(df_raw.head())
-
-        st.write("COLUMN NAMES READ FROM EXCEL:")
-        st.write(list(df_raw.columns))
-
+        
 
         # Step 1: Merge raw features → 22 merged features
         df_merged = merge_features(df_raw)
