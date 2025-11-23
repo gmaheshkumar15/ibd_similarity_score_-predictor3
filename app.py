@@ -175,9 +175,9 @@ if uploaded_file:
             with c2:
                 st.dataframe(styler2, use_container_width=True, hide_index=True)
 
-        with col_right:
+       with col_right:
             st.subheader("Similarity Score")
-            st.markdown(f" {log_prob[0] * 100:.0f}")
+            st.markdown(f"<h1 style='text-align:center;'>{log_prob[0] * 100:.0f}</h1>",unsafe_allow_html=True)
 
             # ---------- Step 5: Formatted Excel (Vertical Layout with Title & Borders) ----------
             output = BytesIO()
