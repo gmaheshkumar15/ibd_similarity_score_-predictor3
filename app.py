@@ -21,6 +21,7 @@ except Exception as e:
 # -----------------------------
 st.set_page_config(page_title="IBD Risk Prediction", layout="wide")
 
+
 # -----------------------------
 # Custom CSS
 # -----------------------------
