@@ -1,7 +1,7 @@
 # merge_config.py
 import pandas as pd
 MERGE_MAP = {
-    "Wheat(Chapati,Roti,Naan,Dalia,Rawa/Sooji,Seviyaan": [
+    "WHEAT(CHAPATI,ROTI,NAAN,DALIA,RAWA/SOOJI,SEVIYAAN": [
             'Wheat(Chapati,Roti,Naan,Dalia,Rawa/Sooji,Seviyaan'],
     
     "WHEAT FREE CEREALS": [
@@ -54,7 +54,7 @@ MERGE_MAP = {
     
     "RED MEAT": ["RED MEAT(MOTTON/PORK/BEEF)"],
     
-    "MILK": ["MILK "],
+    "MILK ": ["MILK"],
     
     "LOW LACTOSE DAIRY": ["HOME MADE CURD",
                           "HOMEMADE BUTTERMILK/LASSI/CHAACH",
@@ -118,5 +118,6 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
