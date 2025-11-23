@@ -21,7 +21,6 @@ except Exception as e:
 # -----------------------------
 st.set_page_config(page_title="IBD Risk Prediction", layout="wide")
 
-
 # -----------------------------
 # Custom CSS
 # -----------------------------
@@ -175,10 +174,11 @@ if uploaded_file:
             with c2:
                 st.dataframe(styler2, use_container_width=True, hide_index=True)
 
-       with col_right:
-            st.subheader("Similarity Score")
-            st.markdown(f"<h1 style='text-align:center;'>{log_prob[0] * 100:.0f}</h1>",unsafe_allow_html=True)
+        with col_right:
+            st.markdown("<h3 style='text-align:center;'>Similarity Score</h3>", unsafe_allow_html=True)
+            st.markdown(f"<p style='font-size:50px; font-weight:bold; color:#8B0000; text-align:center;'>{log_prob[0] * 100:.0f}</p>",unsafe_allow_html=True)
 
+            
             # ---------- Step 5: Formatted Excel (Vertical Layout with Title & Borders) ----------
             output = BytesIO()
             wb = Workbook()
@@ -212,7 +212,7 @@ if uploaded_file:
             ws["A{}".format(ws.max_row)].alignment = ws["B{}".format(ws.max_row)].alignment = Alignment(horizontal="center", vertical="center")
 
             ws.append(["Logistic Regression", round(log_prob[0] * 100, 0)])
-
+            
             # ---- Borders (inside + outside) ----
             thin_border = Border(
                 left=Side(style="thin"),
