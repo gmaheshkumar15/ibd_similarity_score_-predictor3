@@ -117,13 +117,14 @@ if uploaded_file:
     try:
         df_temp = pd.read_excel(uploaded_file, engine="openpyxl", header=None)
 
-# Find the row that contains the first feature name
+# Find first row where at least 5 cells are non-empty text → header row
+        header_row = None
         for i in range(len(df_temp)):
-            if str(df_temp.iloc[i,0]).strip().upper() in feature_names[0].upper():
+            row = df_temp.iloc[i]
+            text_count = sum([isinstance(x, str) for x in row])
+            if text_count >= 5:
                 header_row = i
                 break
-        
-        
 
         df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=header_row)
 
