@@ -18,14 +18,14 @@ MERGE_MAP = {
         "RED,DEEP ORANGES,YELLOW FRUITS",
         "CITRUS FRUITS",
         "BERRIES AND GRAPES",
-        "OTHERS FRUITS"
+        "OTHER FRUITS"
     ],
 
     "OTHER VEGETABLES": [
         "GREEN LEAFY",
         "GREEN(TINDA,TORI,KADU ETC)",
         "CRUCIFEROUS",
-        "BULBS(GARLIC,OINION)",
+        "BULBS(GARLIC,ONION)",
         "OTHER VEGETABLE"
     ],
 
@@ -143,4 +143,5 @@ MERGE_MAP = {
         "FAT BURNERS/BODY BUILDING GYM SUPPLEMENTS"
     ]
 }
+
 
