@@ -108,3 +108,10 @@ MERGE_MAP = {
     
 }
 
+def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
+    merged = {}
+    for merged_name, raw_features in MERGE_MAP.items():
+        existing = [f for f in raw_features if f in df_raw.columns]
+        merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
+    return pd.DataFrame(merged)
+
