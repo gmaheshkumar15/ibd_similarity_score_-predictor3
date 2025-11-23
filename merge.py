@@ -51,10 +51,10 @@ MERGE_MAP = {
         "LINSEED OIL(ALSI), CANOLA OIL, MUSTARD OIL, OLIVE OIL"
     ],
 
-    "TRANS FATS": ["DALDA, VANASPATI, ETC"],
+    "TRANS FATS": ["DALDA,VANASPATI,ETC"],
 
     "NUTS AND OILSEEDS": [
-        "ALMONDS, WALNUTS, GROUNDNUTS, CASHEWNUTS, FLAX SEEDS, SUNFLOWER SEEDS"
+        "ALMONDS,WALNUTS,GROUNDNUTS,CASHEWNUTS,FLAX SEEDS,SUNFLOWER SEEDS"
     ],
 
     "EGGS,FISH AND POULTRY": [
@@ -153,6 +153,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
