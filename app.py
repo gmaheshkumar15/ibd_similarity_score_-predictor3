@@ -127,6 +127,11 @@ if uploaded_file:
                 break
 
         df_raw = pd.read_excel(uploaded_file, engine="openpyxl", header=header_row)
+        # Remove description/instruction rows (non-numeric)
+        df_raw = df_raw.apply(pd.to_numeric, errors='coerce')
+        df_raw = df_raw.dropna(how='all')
+        df_raw = df_raw.reset_index(drop=True)
+
 
 
 
