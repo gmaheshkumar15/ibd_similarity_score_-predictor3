@@ -17,18 +17,18 @@ MERGE_MAP = {
     ],
 
     "FRUITS": [
-        "RED, DEEP ORANGES, YELLOW FRUITS(MANGO, PAPAYA, PEACH ETC)",
-        "CITRUS FRUITS(LEMON, ORANGE, GRAPEFRUITS ETC)",
-        "BERRIES AND GRAPES(RASBERRY, CHERRY, STRAWBERRY, AMLA, GRAPES)",
-        "OTHERS( APPLE, BANANA, CHEEKU, KIWI, ETC)"
+        "RED,DEEP ORANGES,YELLOW FRUITS(MANGO,PAPAYA,PEACH ETC)",
+        "CITRUS FRUITS(LEMON,ORANGE,GRAPEFRUITS ETC)",
+        "BERRIES AND GRAPES(RASBERRY, CHERRY,STRAWBERRY,AMLA,GRAPES)",
+        "OTHERS( APPLE,BANANA,CHEEKU,KIWI,ETC)"
     ],
 
     "OTHER VEGETABLES": [
         "GREEN LEAFY",
-        "GREEN(TINDA.TORI, KADU ETC)",
+        "GREEN(TINDA.TORI,KADU ETC)",
         "CRUCIFEROUS",
-        "BULBS(GARLIC,ONION)",
-        "OTHERS(BRINJAL,CARROT,RADISH,CUCUMBER,TURNIP,GINGER ETC)"
+        "BULBS(GARLIC,OINION)",
+        "OTHERS(BRINJAL,CARROT,RADISH,CUCUMBER, TERNIP,GINGER ETC)"
     ],
 
     "STARCHY(POTATO,SWEET PATATO,ARBI ETC)": [
@@ -153,6 +153,7 @@ def merge_features(df_raw: pd.DataFrame) -> pd.DataFrame:
         existing = [f for f in raw_features if f in df_raw.columns]
         merged[merged_name] = df_raw[existing].sum(axis=1) if existing else 0
     return pd.DataFrame(merged)
+
 
 
 
