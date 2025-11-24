@@ -11,7 +11,7 @@ from io import BytesIO
 # Load models safely
 # -----------------------------
 try:
-    log_model = joblib.load("logistic_final.pkl")
+    log_model = joblib.load("logistic_model_only.pkl")
     scaler = joblib.load("scaler_final.pkl")
 except Exception as e:
     st.error(f"Error loading models: {e}")
